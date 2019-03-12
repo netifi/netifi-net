@@ -3,7 +3,7 @@ mono: none
 dotnet: 2.1
 env:
   global:
-    secure: QRPwvkovTcwRpADIqbMOlgoxyr2pKYQf3dSE5et+VEmp2lNGIGslIFNhqB8qZmU5dj+xYXcBbNCuynjsCihKG9LfnoY8Cv+D45UgAb0OCmCHkFZwjBSXAmU66I9JkxOb4CbMc6PBuVidLcwRwNmVkyG6zXYR38jlnHiCFIg5+GhgFJCNjre+u3dAfV15mHD3twds6edHuJIcSXkucr6hZb4Cb1FeD5BCGGXQI/XPv7OjsX3K0flBr07LxbJoECHU6I7IlKjAQrr9tQ3JNtxRlURgZ+ITTZshRmUSGkxlKaC9goz32X90X4fVQ7+2gOmWj9btjd/eh159cxMauKvrz8q5xgFCgkVd2i/wIqWCyIJOiZbrOKNiX4rm2CcEmWk+OuHcsZ1eWTgppYRAQkxqpGt9nS/MSiAv8chAbK1pfYuQgoCdtYWWgOweUEsThNqfPQyh9SPq48Ck907oIsj6AdIEE0KzO/pbU8VQgw7A2NuD9m1DlDu9PkxQVsbOhMUEXvqv39MsxLTA/88+pw6el/bYXRFvWG+7/k7LfNv0DWG4Nrs7OGgBqr6wP9m40jfoDVnHZOeqCcu6E/zL5fDYj3GIPhpeTPXIY/2FHOkYO97N3ThFeMmrgyYlnL7NbMBnSu4IuH3HDkyCQQ/aRV04yWOU/ZWv5kqkO3QCLeZiSW4=
+    secure: bm/329yFJ2+uJMNAc8klbUI5WvnQxpFOiNBtRBEDxy73044POWTDRnhG7scfR3g8A0uFYfNbji2beoGA+DNGFbHuY52wnoWNpjmYuU2fdGDsr55gxwsgWLfsABdTF0OUlrkCChqF5kBZwmz0qg32KtP97l8hkm2OMTQL4RdhiM4ZLVAzu1b6MSkkMMieGqJrGg+XunmuYaGJ2GzBhylMT0/44ObLRoVy+bXIiBsl516QjiSn4E7bqzdufgDK3+DGxy0om+gQuRkRV6riL+ije85mChib5CQStbeBIHWpOU3z+oUc0Y/iQMRKxmVbnoWJCrbgBXK9ufkBUDAZq9WIOxSFdFiBgf6N4AbBHC7r3vVQinQNHYdHEWFIWrwTcVmGQ/Sq6LmvWZmw6wEJbrI9ZPZyjFxfJStJYmpwr2GAa3GyETbDwwiBLzz+8i0vyS4JDC29X2BFreAx+6nbfROl/5+F0U5PIL0etWzwW5hnpChF4F1QA4ueQKwn3t1Fq40dwKJCHU7+3JxugWcZ+euRJULOnglI1iU3vfUDdGNjDjjariJCAewP1rsywxAhUD4e7Q0Jt6ddEXY8NkyVqHqKqk/mD4KQkc4whdT7HAALK8d9fJrs283bRR3nYm7UMn01aTZ1quX4dTVEGY747Scp88QnQyolDt35uzAGGAB8F/0=
 script:
 - dotnet build -c Release
 - dotnet test
@@ -12,6 +12,6 @@ before_deploy:
 deploy:
   skip_cleanup: true
   provider: script
-  script: dotnet nuget push /home/travis/build/rsocket/rsocket-net/RSocket.Core/bin/Release/RSocket.Core.*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
+  script: dotnet nuget push /home/travis/build/netifi-proteus/proteus-net/Proteus.Core/bin/Release/Proteus.Core.*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
   on:
     tags: true
