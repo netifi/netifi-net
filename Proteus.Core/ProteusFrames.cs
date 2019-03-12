@@ -9,13 +9,13 @@ using RSocket;
 
 namespace Proteus
 {
-	public partial class Frames
+    public partial class Frames
     {
-		public ref struct BrokerSetup
-		{
+        public ref struct BrokerSetup
+        {
             private Header header;
             public string brokerId;
-			public string clusterId;
+            public string clusterId;
             public long accessKey;
             public ReadOnlySequence<byte> accessToken;
 
@@ -24,19 +24,19 @@ namespace Proteus
                 + sizeof(Int32) + Encoding.UTF8.GetByteCount(clusterId)
                 + sizeof(Int64) + sizeof(Int32) + (int)accessToken.Length;
 
-			public BrokerSetup(string brokerId, string clusterId, long accessKey, ReadOnlySequence<byte> accessToken)
-			{
-				this.header = new Header(Types.Broker_Setup);
+            public BrokerSetup(string brokerId, string clusterId, long accessKey, ReadOnlySequence<byte> accessToken)
+            {
+                this.header = new Header(Types.Broker_Setup);
                 this.brokerId = brokerId;
                 this.clusterId = clusterId;
                 this.accessKey = accessKey;
                 this.accessToken = accessToken;
             }
 
-			public BrokerSetup(in Header header, ref SequenceReader<byte> reader)
-			{
-				this.header = header;
-				reader.TryReadBigEndian(out int brokerIdLength);
+            public BrokerSetup(in Header header, ref SequenceReader<byte> reader)
+            {
+                this.header = header;
+                reader.TryReadBigEndian(out int brokerIdLength);
                 reader.TryRead(out brokerId, brokerIdLength, Encoding.UTF8);
                 reader.TryReadBigEndian(out int clusterIdLength);
                 reader.TryRead(out clusterId, clusterIdLength, Encoding.UTF8);
@@ -46,7 +46,7 @@ namespace Proteus
                 reader.Advance(accessTokenLength);
             }
 
-			public void Write(PipeWriter pipe)
+            public void Write(PipeWriter pipe)
             {
                 var writer = BufferWriter.Get(pipe);
                 this.Write(writer);
@@ -54,9 +54,9 @@ namespace Proteus
                 BufferWriter.Return(writer);
             }
 
-			void Write(BufferWriter writer)
-			{
-				var written = header.Write(writer);
+            void Write(BufferWriter writer)
+            {
+                var written = header.Write(writer);
 
                 int brokerIdLength = Encoding.UTF8.GetByteCount(brokerId);
                 written += writer.WriteInt32BigEndian(brokerIdLength);
@@ -70,7 +70,7 @@ namespace Proteus
                 written += writer.WriteInt32BigEndian((int)accessToken.Length);
                 written += writer.Write(accessToken);
             }
-		}
+        }
 
         public ref struct DestinationSetup
         {
@@ -428,33 +428,33 @@ namespace Proteus
         }
 
         public ref struct Header
-		{
+        {
             public UInt16 MajorVersion;
             public UInt16 MinorVersion;
             public Types Type;
-			public int Length => sizeof(UInt16) + sizeof(UInt16) + sizeof(UInt16);
+            public int Length => sizeof(UInt16) + sizeof(UInt16) + sizeof(UInt16);
 
-			public Header(Types type)
-			{
-				Type = type;
+            public Header(Types type)
+            {
+                Type = type;
                 MajorVersion = MAJOR_VERSION;
                 MinorVersion = MINOR_VERSION;
-			}
+            }
 
-			public Header(ref SequenceReader<byte> reader)
-			{
+            public Header(ref SequenceReader<byte> reader)
+            {
                 reader.TryReadBigEndian(out UInt16 majorVersion); MajorVersion = majorVersion;
                 reader.TryReadBigEndian(out UInt16 minorVersion); MinorVersion = minorVersion;
                 reader.TryReadBigEndian(out UInt16 type); Type = (Types)type;
-			}
+            }
 
-			public int Write(BufferWriter writer)
-			{
-				writer.WriteUInt16BigEndian(MajorVersion);
+            public int Write(BufferWriter writer)
+            {
+                writer.WriteUInt16BigEndian(MajorVersion);
                 writer.WriteUInt16BigEndian(MinorVersion);
                 writer.WriteUInt16BigEndian((int)Type);
                 return Length;
-			}
-		}
-	}
+            }
+        }
+    }
 }

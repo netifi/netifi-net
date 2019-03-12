@@ -10,13 +10,13 @@ namespace Proteus
         private const int MaxMetadataLength = 16777215;
 
         public enum Types
-		{
-			Undefined = 0x00,
-			Broker_Setup = 0x01,
-			Destination_Setup = 0x02,
-			Group = 0x03,
-			Broadcast = 0x04,
-			Shard = 0x05,
-		}
-	}
+        {
+            Undefined = 0x00,
+            Broker_Setup = 0x01,
+            Destination_Setup = 0x02,
+            Group = 0x03,
+            Broadcast = 0x04,
+            Shard = 0x05,
+        }
+    }
 }

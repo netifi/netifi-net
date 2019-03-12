@@ -9,12 +9,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Proteus.Tests
 {
-	[TestClass]
-	public class ProteusFramesTests
-	{
-		[TestMethod]
-		public void BrokerSetupTest()
-		{
+    [TestClass]
+    public class ProteusFramesTests
+    {
+        [TestMethod]
+        public void BrokerSetupTest()
+        {
             var accessToken = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("access token"));
             var input = new Frames.BrokerSetup("brokerId", "clusterId", long.MaxValue, accessToken);
 
