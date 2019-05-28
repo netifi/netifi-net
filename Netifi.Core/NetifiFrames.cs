@@ -7,7 +7,7 @@ using System.Net;
 using System.Text;
 using RSocket;
 
-namespace Proteus
+namespace Netifi
 {
     public partial class Frames
     {

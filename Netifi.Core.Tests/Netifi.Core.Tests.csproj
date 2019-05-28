@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Proteus.Core\Proteus.Core.csproj" />
+    <ProjectReference Include="..\Netifi.Core\Netifi.Core.csproj" />
   </ItemGroup>
 
 </Project>

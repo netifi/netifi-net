@@ -1,6 +1,6 @@
 using System;
 
-namespace Proteus
+namespace Netifi
 {
     partial class Frames
     {

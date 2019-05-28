@@ -7,10 +7,10 @@ using System.Net;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Proteus.Tests
+namespace Netifi.Tests
 {
     [TestClass]
-    public class ProteusFramesTests
+    public class NetifiFramesTests
     {
         [TestMethod]
         public void BrokerSetupTest()

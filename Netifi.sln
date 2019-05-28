@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proteus.Core", "Proteus.Core\Proteus.Core.csproj", "{8575B6E4-9E7F-4473-8D56-9FE21240B1C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netifi.Core", "Netifi.Core\Netifi.Core.csproj", "{8575B6E4-9E7F-4473-8D56-9FE21240B1C4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proteus.Core.Tests", "Proteus.Core.Tests\Proteus.Core.Tests.csproj", "{AF95925C-C011-4EB8-BDEE-A28736042974}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netifi.Core.Tests", "Netifi.Core.Tests\Netifi.Core.Tests.csproj", "{AF95925C-C011-4EB8-BDEE-A28736042974}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
