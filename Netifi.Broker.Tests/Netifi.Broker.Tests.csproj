@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Netifi.Core\Netifi.Core.csproj" />
+    <ProjectReference Include="..\Netifi.Broker.Frames\Netifi.Broker.Frames.csproj" />
   </ItemGroup>
 
 </Project>

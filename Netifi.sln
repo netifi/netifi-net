@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netifi.Core", "Netifi.Core\Netifi.Core.csproj", "{8575B6E4-9E7F-4473-8D56-9FE21240B1C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netifi.Broker.Frames", "Netifi.Broker.Frames\Netifi.Broker.Frames.csproj", "{8575B6E4-9E7F-4473-8D56-9FE21240B1C4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netifi.Core.Tests", "Netifi.Core.Tests\Netifi.Core.Tests.csproj", "{AF95925C-C011-4EB8-BDEE-A28736042974}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netifi.Broker.Tests", "Netifi.Broker.Tests\Netifi.Broker.Tests.csproj", "{AF95925C-C011-4EB8-BDEE-A28736042974}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netifi.Broker.Idl", "Netifi.Broker.Idl\Netifi.Broker.Idl.csproj", "{4DA9167B-8B89-4424-BF1B-717E829751F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netifi.Broker.Client", "Netifi.Broker.Client\Netifi.Broker.Client.csproj", "{B25BE0C5-4466-4B6A-A93E-1E7E613F9F05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{AF95925C-C011-4EB8-BDEE-A28736042974}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF95925C-C011-4EB8-BDEE-A28736042974}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF95925C-C011-4EB8-BDEE-A28736042974}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DA9167B-8B89-4424-BF1B-717E829751F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DA9167B-8B89-4424-BF1B-717E829751F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DA9167B-8B89-4424-BF1B-717E829751F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DA9167B-8B89-4424-BF1B-717E829751F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B25BE0C5-4466-4B6A-A93E-1E7E613F9F05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B25BE0C5-4466-4B6A-A93E-1E7E613F9F05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B25BE0C5-4466-4B6A-A93E-1E7E613F9F05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B25BE0C5-4466-4B6A-A93E-1E7E613F9F05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

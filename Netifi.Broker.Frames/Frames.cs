@@ -7,7 +7,7 @@ using System.Net;
 using System.Text;
 using RSocket;
 
-namespace Netifi
+namespace Netifi.Broker
 {
     public partial class Frames
     {

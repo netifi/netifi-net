@@ -1,6 +1,6 @@
 using System;
 
-namespace Netifi
+namespace Netifi.Broker
 {
     partial class Frames
     {

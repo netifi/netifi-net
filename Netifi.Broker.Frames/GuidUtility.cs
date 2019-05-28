@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Netifi
+namespace Netifi.Broker
 {
     /// <summary>
     /// Helper methods for working with <see cref="Guid"/>.
