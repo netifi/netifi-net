@@ -54,7 +54,7 @@ namespace Netifi.Broker
                 BufferWriter.Return(writer);
             }
 
-            void Write(BufferWriter writer)
+            public void Write(BufferWriter writer)
             {
                 var written = header.Write(writer);
 
@@ -153,7 +153,7 @@ namespace Netifi.Broker
                 BufferWriter.Return(writer);
             }
 
-            void Write(BufferWriter writer)
+            public void Write(BufferWriter writer)
             {
                 var written = header.Write(writer);
 
@@ -245,7 +245,7 @@ namespace Netifi.Broker
                 BufferWriter.Return(writer);
             }
 
-            void Write(BufferWriter writer)
+            public void Write(BufferWriter writer)
             {
                 var written = header.Write(writer);
 
@@ -319,7 +319,7 @@ namespace Netifi.Broker
                 BufferWriter.Return(writer);
             }
 
-            void Write(BufferWriter writer)
+            public void Write(BufferWriter writer)
             {
                 var written = header.Write(writer);
 
@@ -401,7 +401,7 @@ namespace Netifi.Broker
                 BufferWriter.Return(writer);
             }
 
-            void Write(BufferWriter writer)
+            public void Write(BufferWriter writer)
             {
                 var written = header.Write(writer);
 

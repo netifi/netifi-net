@@ -7,15 +7,18 @@
 
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Netifi.Broker.Client\Netifi.Broker.Client.csproj" />
+    <ProjectReference Include="..\Netifi.Broker.Frames\Netifi.Broker.Frames.csproj" />
+    <ProjectReference Include="..\Netifi.Broker.Idl\Netifi.Broker.Idl.csproj" />
+  </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
+    <PackageReference Include="System.Linq.Async" Version="4.0.0-preview.1.build.745" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Netifi.Broker.Frames\Netifi.Broker.Frames.csproj" />
-  </ItemGroup>
-
+  
 </Project>
