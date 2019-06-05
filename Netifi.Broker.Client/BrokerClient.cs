@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.IO.Pipelines;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,57 +9,100 @@ using RSocket;
 
 namespace Netifi.Broker.Client
 {
-    public class BrokerClient : RSocketClient
+    public class BrokerClient
     {
-        private readonly long AccessKey;
-        private readonly ReadOnlySequence<byte> AccessToken;
-        private readonly Guid ConnectionId;
-        private readonly IPAddress IpAddress;
-        private readonly string Group;
-        private readonly string Destination;
-        private readonly short AdditionalFlags;
-        private readonly SortedDictionary<string, string> Tags;
-        private readonly RSocketOptions Options;
+        private static readonly string DEFAULT_DESTINATION = Guid.NewGuid().ToString();
+
+        private readonly long accessKey;
+        private readonly byte[] accessToken;
+        private readonly Guid connectionId;
+        private readonly IPAddress ipAddress;
+        private readonly string group;
+        private readonly string destination;
+        private readonly short additionalFlags;
+        private readonly SortedDictionary<string, string> tags;
+        private readonly IRSocketTransport transport;
+        private readonly RSocketOptions options;
+        private readonly RSocketClient client;
 
         public BrokerClient(
-            long AccessKey,
-            ReadOnlySequence<byte> AccessToken,
-            Guid? ConnectionId,
-            IPAddress IpAddress,
-            string Group,
-            string Destination,
-            short AdditionalFlags,
-            SortedDictionary<string, string> Tags,
-            RSocketOptions Options,
-            IRSocketTransport Transport) : base(Transport, Options)
+            long accessKey,
+            string accessToken,
+            Guid? connectionId,
+            IPAddress ipAddress,
+            string group,
+            string destination,
+            short additionalFlags,
+            SortedDictionary<string, string> tags,
+            IRSocketTransport transport,
+            RSocketOptions options)
         {
-            this.AccessKey = AccessKey;
-            this.AccessToken = AccessToken;
-            this.ConnectionId = ConnectionId.GetValueOrDefault(Guid.NewGuid());
-            this.IpAddress = IpAddress;
-            this.Group = Group;
-            this.Destination = Destination;
-            this.AdditionalFlags = AdditionalFlags;
-            this.Tags = Tags;
-            this.Options = Options;
+            this.accessKey = accessKey;
+            this.accessToken = Convert.FromBase64String(accessToken);
+            this.connectionId = connectionId.GetValueOrDefault(Guid.NewGuid());
+            this.ipAddress = ipAddress;
+            this.group = group;
+            this.destination = destination ?? DEFAULT_DESTINATION;
+            this.additionalFlags = additionalFlags;
+            this.tags = tags;
+            this.tags.Add("com.netifi.destination", this.destination);
+            this.transport = transport;
+            this.options = options;
+            this.client = new RSocketClient(transport, options);
         }
 
-        public new async Task ConnectAsync()
+        private byte[] writeSetupMetadata()
         {
-            await Transport.StartAsync();
-            var handler = Connect(CancellationToken.None);
-
             var setup = new ArrayBufferWriter<byte>();
             var writer = new BufferWriter(setup, null);
-            new Frames.DestinationSetup(IpAddress, Group, AccessKey, AccessToken, ConnectionId, AdditionalFlags, Tags).Write(writer);
-
+            new Frames.DestinationSetup(ipAddress, group, accessKey, new ReadOnlySequence<byte>(accessToken), connectionId, additionalFlags, tags).Write(writer);
             writer.Flush();
-            var metadata = new ReadOnlySequence<byte>(setup.WrittenMemory);
 
-            new RSocketProtocol.Setup((int)Options.KeepAlive.TotalMilliseconds, (int)Options.Lifetime.TotalMilliseconds, Options.MetadataMimeType, Options.DataMimeType, metadata: metadata).Write(Transport.Output);
-            await Transport.Output.FlushAsync();
+            return setup.WrittenMemory.ToArray();
+        }
 
-            setup.Dispose();
+        public async Task ConnectAsync()
+        {
+            await client.ConnectAsync(options, metadata: writeSetupMetadata());
+        }
+
+        public RSocket.RSocket Group(string group, SortedDictionary<string, string> tags = default)
+        {
+            return new BrokerSocket(client, metadata =>
+            {
+                var bytes = new ArrayBufferWriter<byte>();
+                var writer = new BufferWriter(bytes, null);
+                new Frames.Group(group, metadata, tags).Write(writer);
+                writer.Flush();
+
+                return new ReadOnlySequence<byte>(bytes.WrittenMemory);
+            });
+        }
+
+        public RSocket.RSocket Broadcast(string group, SortedDictionary<string, string> tags = default)
+        {
+            return new BrokerSocket(client, metadata =>
+            {
+                var bytes = new ArrayBufferWriter<byte>();
+                var writer = new BufferWriter(bytes, null);
+                new Frames.Broadcast(group, metadata, tags).Write(writer);
+                writer.Flush();
+
+                return new ReadOnlySequence<byte>(bytes.WrittenMemory);
+            });
+        }
+
+        public RSocket.RSocket Shard(string group, ReadOnlySequence<byte> shardKey, SortedDictionary<string, string> tags = default)
+        {
+            return new BrokerSocket(client, metadata =>
+            {
+                var bytes = new ArrayBufferWriter<byte>();
+                var writer = new BufferWriter(bytes, null);
+                new Frames.Shard(group, metadata, shardKey, tags).Write(writer);
+                writer.Flush();
+
+                return new ReadOnlySequence<byte>(bytes.WrittenMemory);
+            });
         }
     }
 }

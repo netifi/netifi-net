@@ -21,16 +21,17 @@ namespace Netifi.Broker.Tests
         public async Task BrokerClientTest()
         {
             var accessKey = 9007199254740991;
-            var accessToken = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("kTBDVtfRBO4tHOnZzSyY5ym2kfY="));
+            var accessToken = "kTBDVtfRBO4tHOnZzSyY5ym2kfY=";
             var tags = new SortedDictionary<string, string> {
                 { "key", "value" }
             };
             var transport = new SocketTransport("tcp://localhost:8001/");
-            var client = new Client.BrokerClient(accessKey, accessToken, null, null, "group", "destination", 0, tags, RSocketOptions.Default, transport);
+            var client = new Client.BrokerClient(accessKey, accessToken, null, null, "group", "destination", 0, tags, transport, RSocketOptions.Default);
 
             await client.ConnectAsync();
 
-            var brokerInfoService = new BrokerInfoService.BrokerInfoServiceClient(client);
+            var group = client.Group("com.netifi.broker.brokerServices", new SortedDictionary<string, string>());
+            var brokerInfoService = new BrokerInfoService.BrokerInfoServiceClient(group);
             var stream = brokerInfoService.Brokers(new Empty(), new ReadOnlySequence<byte>());
 
             var enumerator = stream.GetAsyncEnumerator();
