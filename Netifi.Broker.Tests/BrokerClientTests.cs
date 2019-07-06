@@ -17,7 +17,7 @@ namespace Netifi.Broker.Tests
     [TestClass]
     public class BrokerClientTests
     {
-        [TestMethod]
+        [TestMethod, Ignore]
         public async Task BrokerClientTest()
         {
             var accessKey = 9007199254740991;
