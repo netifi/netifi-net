@@ -9,4 +9,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Netifi.Broker.Frames\Netifi.Broker.Frames.csproj" />
   </ItemGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="RSocket.Rpc.Core" Version="0.2.10" />
+  </ItemGroup>
 </Project>

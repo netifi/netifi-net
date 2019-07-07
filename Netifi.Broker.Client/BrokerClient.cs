@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using RSocket;
+using RSocket.RPC;
 
 namespace Netifi.Broker.Client
 {
@@ -64,6 +65,11 @@ namespace Netifi.Broker.Client
         public async Task ConnectAsync()
         {
             await client.ConnectAsync(options, metadata: writeSetupMetadata());
+        }
+
+        public void AddService(IRSocketService service)
+        {
+            RSocketService.Register(client, service);
         }
 
         public RSocket.RSocket Group(string group, SortedDictionary<string, string> tags = default)

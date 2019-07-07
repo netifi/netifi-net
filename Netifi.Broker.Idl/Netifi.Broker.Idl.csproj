@@ -12,7 +12,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="RSocket.Rpc.Core" Version="0.2.9" />
+    <PackageReference Include="RSocket.Rpc.Core" Version="0.2.10" />
   </ItemGroup>
   
   <ItemGroup>
