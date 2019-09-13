@@ -11,6 +11,6 @@
   </ItemGroup>
     
   <ItemGroup>
-    <PackageReference Include="RSocket.Rpc.Core" Version="0.2.11" />
+    <PackageReference Include="RSocket.Rpc.Core" Version="0.2.12" />
   </ItemGroup>
 </Project>
