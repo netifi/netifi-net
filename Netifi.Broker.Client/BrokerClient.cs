@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Buffers;
 using System.Collections.Generic;
-using System.IO.Pipelines;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 using RSocket;
 using RSocket.RPC;
@@ -69,7 +67,7 @@ namespace Netifi.Broker.Client
 
         public void AddService(IRSocketService service)
         {
-            RSocketService.Register(client, service);
+            RSocketService.Register(client, service, metadata => new RSocketService.RemoteProcedureCallMetadata(FramesUtility.UnwrapMetadata(new SequenceReader<byte>(metadata))));
         }
 
         public RSocket.RSocket Group(string group, SortedDictionary<string, string> tags = default)
